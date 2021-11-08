@@ -4,7 +4,7 @@ import React, { useState } from "react";
 // React Router
 import { Link, useLocation } from "react-router-dom";
 //MUI
-import { Grid, List, ListItem, ListItemText } from "@mui/material";
+import { Divider, Grid, List, ListItem, ListItemText } from "@mui/material";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
@@ -17,6 +17,7 @@ import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import HomeIcon from "@mui/icons-material/Home";
 import ReceiptIcon from "@mui/icons-material/Receipt";
 import ContactMailIcon from "@mui/icons-material/ContactMail";
+import { useMediaQuery } from "@mui/material";
 // files
 import logo from "../assets/logo.svg";
 
@@ -26,6 +27,7 @@ const Header = () => {
   const [value, setValue] = useState(0);
   const [open, setOpen] = useState(false);
   const theme = useTheme();
+  const matchesSm = useMediaQuery(theme.breakpoints.down("sm"));
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -38,13 +40,13 @@ const Header = () => {
     <Box
       sx={{
         width: "100%",
-        backgroundColor: "salmon",
+        backgroundColor: theme.palette.secondary.main,
         borderRadius: "0 0 30px 30px",
       }}
     >
       <Grid
         sx={{
-          height: "6em",
+          height: matchesSm ? "4em" : "6em",
           width: "100%",
         }}
         container
@@ -58,7 +60,7 @@ const Header = () => {
             maxHeight: "100%",
             justifySelf: "flex-end",
             "& img": {
-              maxHeight: "5em",
+              maxHeight: matchesSm ? "3em" : "5em",
               paddingTop: "0.1em",
               paddingLeft: "0.1em",
             },
@@ -78,25 +80,24 @@ const Header = () => {
               },
             }}
           >
-            <Typography variant="tab">
-              <Tabs
-                indicatorColor="secondary"
-                textColor="secondary"
-                value={value}
-                onChange={handleChange}
-                aria-label="basic tabs example"
-                sx={{
-                  "& button": {
-                    fontSize: "1.2rem",
-                  },
-                }}
-              >
-                <Tab component={Link} to="/resume" label="ساخت رزومه" />
+            <Tabs
+              indicatorColor="primary"
+              textColor="#fff"
+              value={value}
+              onChange={handleChange}
+              aria-label="basic tabs example"
+              sx={{
+                color: "#fff",
+                "& button": {
+                  fontSize: "1.2rem",
+                },
+              }}
+            >
+              <Tab component={Link} to="/resume" label="ساخت رزومه" />
 
-                <Tab component={Link} to="/about" label="درباره من" />
-                <Tab component={Link} to="/" label="صفحه اصلی" />
-              </Tabs>
-            </Typography>
+              <Tab component={Link} to="/about" label="درباره من" />
+              <Tab component={Link} to="/" label="صفحه اصلی" />
+            </Tabs>
           </Box>
           <Box
             sx={{
@@ -127,21 +128,23 @@ const Header = () => {
                 <ListItem component={Link} to="/" button>
                   <ListItemIcon>
                     {" "}
-                    <HomeIcon />
+                    <HomeIcon color="secondary" />
                   </ListItemIcon>
                   <ListItemText primary="صفحه اصلی" />
                 </ListItem>
+                <Divider />
                 <ListItem component={Link} to="/resume" button>
                   <ListItemIcon>
                     {" "}
-                    <ReceiptIcon />
+                    <ReceiptIcon color="secondary" />
                   </ListItemIcon>
                   <ListItemText primary="ساخت رزومه" />
                 </ListItem>
+                <Divider />
                 <ListItem component={Link} to="/about" button>
                   <ListItemIcon>
                     {" "}
-                    <ContactMailIcon />
+                    <ContactMailIcon color="secondary" />
                   </ListItemIcon>
                   <ListItemText primary="درباره من" />
                 </ListItem>

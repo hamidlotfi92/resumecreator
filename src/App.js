@@ -11,7 +11,7 @@ import theme from "./components/Theme";
 import { Box } from "@mui/system";
 // Components
 import Header from "./components/Header";
-
+import Footer from "./components/Footer";
 //pages
 import HomePage from "./pages/HomePage.jsx";
 
@@ -29,6 +29,7 @@ function App() {
           }}
           container
           direction="column"
+          justifyContent="space-between"
         >
           <Grid
             sx={{ backgroundColor: theme.palette.background.default }}
@@ -53,7 +54,14 @@ function App() {
             </Box>
           </Grid>
 
-          <Grid item container alignSelf="flex-end"></Grid>
+          <Grid
+            sx={{ backgroundColor: theme.palette.background.default }}
+            item
+            container
+            alignSelf="flex-end"
+          >
+            <Footer />
+          </Grid>
         </Grid>
       </ThemeProvider>
     </BrowserRouter>

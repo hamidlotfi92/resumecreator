@@ -5,18 +5,20 @@ import React from "react";
 import { Button, Grid, Paper, Typography } from "@mui/material";
 import { useMediaQuery, useTheme } from "@mui/material";
 import Box from "@mui/material/Box";
+import MoodIcon from "@mui/icons-material/Mood";
 
 //svgs
 import choice from "../assets/home-choice.svg";
 import confusion from "../assets/home-confiusion.svg";
 import help from "../assets/home-help.svg";
 import responsive from "../assets/home-responsive.svg";
+import bemyGuest from "../assets/beMyGuest.svg";
 
 const HomePage = () => {
   const theme = useTheme();
   const matchesMd = useMediaQuery(theme.breakpoints.down("md"));
   const matchesSm = useMediaQuery(theme.breakpoints.down("sm"));
-
+  const matchesLg = useMediaQuery(theme.breakpoints.down("lg"));
   return (
     <Box sx={{ backgroundColor: theme.palette.background.default }}>
       <Grid
@@ -94,7 +96,7 @@ const HomePage = () => {
           container
           alignItems="center"
           justifyContent="space-around"
-          direction="row"
+          direction={matchesMd ? "column-reverse" : "row"}
         >
           <Paper sx={{ borderRadius: 7, maxWidth: "90%" }} variant="outlined">
             <Grid
@@ -147,7 +149,7 @@ const HomePage = () => {
             <img
               style={{
                 marginTop: matchesMd ? "4em" : undefined,
-                height: "19em",
+                height: matchesLg ? "12em" : "19em",
                 maxWidth: "100%",
               }}
               src={confusion}
@@ -187,7 +189,7 @@ const HomePage = () => {
           container
           alignItems="center"
           justifyContent="space-around"
-          direction="row"
+          direction={matchesMd ? "column-reverse" : "row"}
         >
           <Paper sx={{ borderRadius: 7, maxWidth: "90%" }} variant="outlined">
             <Grid
@@ -224,6 +226,70 @@ const HomePage = () => {
               alt=""
             />
           </Grid>
+        </Grid>
+        <Grid
+          sx={{
+            marginTop: matchesSm ? "6em" : "10em",
+            width: "100%",
+            marginBottom: "4em",
+          }}
+          container
+          alignItems="center"
+          justifyContent="space-around"
+          direction={matchesMd ? "column" : "row"}
+        >
+          <Grid justifyContent="space-around" item>
+            <img
+              style={{
+                marginTop: matchesMd ? "4em" : undefined,
+                height: "19em",
+                maxWidth: "100%",
+              }}
+              src={bemyGuest}
+              alt=""
+            />
+          </Grid>
+          <Paper
+            sx={{ justifyContent: "center", borderRadius: 7, maxWidth: "90%" }}
+            variant="outlined"
+          >
+            <Grid
+              sx={{
+                margin: "2em",
+                padding: matchesMd ? "0 1em" : 0,
+                width: "25em",
+              }}
+              item
+              container
+              direction="column"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Typography
+                sx={{ padding: "2" }}
+                variant={matchesMd ? "h6" : "h5"}
+                align="center"
+              >
+                هزینه ش چقدر میشه؟!؟
+              </Typography>
+              <Typography sx={{ padding: "2" }} variant="body1" align="center">
+                {" "}
+                هیچی! مهمون من باش
+              </Typography>
+              <Button
+                sx={{
+                  marginTop: "1em",
+                  backgroundColor: theme.palette.secondary.main,
+                  color: "#fff",
+                  fontWeight: 700,
+                }}
+                variant="outlined"
+              >
+                {" "}
+                رزومه ت رو بساز
+              </Button>
+            </Grid>
+          </Paper>
         </Grid>
       </Grid>
     </Box>

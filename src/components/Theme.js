@@ -3,8 +3,8 @@ import { createTheme } from "@mui/material";
 export default createTheme({
   palette: {
     mode: "light",
-    common: {
-      salmon: "#fa8072",
+    primary: {
+      main: "#ff4141",
     },
     secondary: {
       main: "#6c63ff",
