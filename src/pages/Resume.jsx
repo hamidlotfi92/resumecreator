@@ -101,27 +101,28 @@ const Resume = () => {
   const renderSwitch = (param) => {
     switch (param) {
       case 0:
-        return;
-        <PersonalInfo
-          personInfo={personInfo}
-          setPersonInfo={setPersonInfo}
-          preview={preview}
-          setPreview={setPreview}
-          skillsArray={skillsArray}
-          setSkillsArray={setSkillsArray}
-          selectedFile={selectedFile}
-          setSelectedFile={setSelectedFile}
-        />;
-
+        return (
+          <PersonalInfo
+            personInfo={personInfo}
+            setPersonInfo={setPersonInfo}
+            preview={preview}
+            setPreview={setPreview}
+            skillsArray={skillsArray}
+            setSkillsArray={setSkillsArray}
+            selectedFile={selectedFile}
+            setSelectedFile={setSelectedFile}
+          />
+        );
         break;
       case 1:
-        return;
-        <EmplymentHistory
-          educationArray={educationArray}
-          setEducationArray={setEducationArray}
-          employmentArray={employmentArray}
-          setEmploymentArray={setEmploymentArray}
-        />;
+        return (
+          <EmplymentHistory
+            educationArray={educationArray}
+            setEducationArray={setEducationArray}
+            employmentArray={employmentArray}
+            setEmploymentArray={setEmploymentArray}
+          />
+        );
 
         break;
       // this code is for testing pdf creation and is not ready yet

@@ -23,7 +23,7 @@ import logo from "../assets/logo.svg";
 
 // this is header of the site and is shown in all the pages.
 const Header = () => {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(2);
   const [open, setOpen] = useState(false);
   const theme = useTheme();
   const matchesSm = useMediaQuery(theme.breakpoints.down("sm"));
