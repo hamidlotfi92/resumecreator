@@ -2,10 +2,9 @@
 import React, { useState } from "react";
 //MUI
 import { Button, Grid } from "@mui/material";
-import { useMediaQuery, useTheme } from "@mui/material";
+
 import { Typography } from "@mui/material";
 import { TextField } from "@mui/material";
-import { Paper } from "@mui/material";
 
 //components
 import EduPreview from "./EduPreview";
@@ -19,10 +18,6 @@ const EmplymentHistory = ({
 }) => {
   const [education, setEducation] = useState({});
   const [employment, setEmployment] = useState({});
-  const theme = useTheme();
-  const matchesMd = useMediaQuery(theme.breakpoints.down("md"));
-  const matchesSm = useMediaQuery(theme.breakpoints.down("sm"));
-  const matchesLg = useMediaQuery(theme.breakpoints.down("lg"));
 
   const handeEduChange = (e) => {
     setEducation({ ...education, [e.target.id]: e.target.value });

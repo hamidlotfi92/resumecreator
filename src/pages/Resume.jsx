@@ -8,8 +8,6 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import Snackbar from "@mui/material/Snackbar";
-import Slide from "@mui/material/Slide";
 import { Collapse } from "@mui/material";
 import { Alert } from "@mui/material";
 import { IconButton } from "@mui/material";
@@ -18,7 +16,7 @@ import { Close } from "@mui/icons-material";
 //Components
 import PersonalInfo from "../components/PersonalInfo";
 import EmplymentHistory from "../components/EmploymentHistory";
-
+import Print from "../components/Print";
 const steps = ["اطلاعات شخصی", "سوابق", "تایید"];
 
 const Resume = () => {
@@ -103,30 +101,33 @@ const Resume = () => {
   const renderSwitch = (param) => {
     switch (param) {
       case 0:
-        return (
-          <PersonalInfo
-            personInfo={personInfo}
-            setPersonInfo={setPersonInfo}
-            preview={preview}
-            setPreview={setPreview}
-            skillsArray={skillsArray}
-            setSkillsArray={setSkillsArray}
-            selectedFile={selectedFile}
-            setSelectedFile={setSelectedFile}
-          />
-        );
+        return;
+        <PersonalInfo
+          personInfo={personInfo}
+          setPersonInfo={setPersonInfo}
+          preview={preview}
+          setPreview={setPreview}
+          skillsArray={skillsArray}
+          setSkillsArray={setSkillsArray}
+          selectedFile={selectedFile}
+          setSelectedFile={setSelectedFile}
+        />;
+
         break;
       case 1:
-        return (
-          <EmplymentHistory
-            educationArray={educationArray}
-            setEducationArray={setEducationArray}
-            employmentArray={employmentArray}
-            setEmploymentArray={setEmploymentArray}
-          />
-        );
-        break;
+        return;
+        <EmplymentHistory
+          educationArray={educationArray}
+          setEducationArray={setEducationArray}
+          employmentArray={employmentArray}
+          setEmploymentArray={setEmploymentArray}
+        />;
 
+        break;
+      // this code is for testing pdf creation and is not ready yet
+      //   case 2:
+      //     return <Print preview={preview} />;
+      //     break;
       default:
         break;
     }

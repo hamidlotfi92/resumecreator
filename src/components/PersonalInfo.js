@@ -1,19 +1,13 @@
 //React
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 //MUI
-import { Button, Grid, Paper, Slider, Typography } from "@mui/material";
+import { Grid, Paper, Slider, Typography } from "@mui/material";
 import { TextField } from "@mui/material";
-import { Box, grid, width } from "@mui/system";
+
 import UploadFileRoundedIcon from "@mui/icons-material/UploadFileRounded";
 import { useMediaQuery, useTheme } from "@mui/material";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
-import AdapterJalali from "@date-io/date-fns-jalali";
-import DatePicker from "@mui/lab/DatePicker";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
-
-//Jalali moment
-import moment from "jalali-moment";
 
 //components
 import Skill from "./Skill";
@@ -21,20 +15,19 @@ import Skill from "./Skill";
 //this compnent is where user enters personal information,
 const PersonalInfo = ({
   preview,
-  setPreview,
+
   skillsArray,
   setSkillsArray,
-  selectedFile,
+
   setSelectedFile,
   setPersonInfo,
   personInfo,
 }) => {
   const [skill, setSkill] = useState({ name: "", level: 1 });
-  const [dateValue, setDateValue] = React.useState(new Date());
+
   const theme = useTheme();
-  const matchesMd = useMediaQuery(theme.breakpoints.down("md"));
+
   const matchesSm = useMediaQuery(theme.breakpoints.down("sm"));
-  const matchesLg = useMediaQuery(theme.breakpoints.down("lg"));
 
   // create a preview as a side effect, whenever selected file is changed
 
@@ -69,11 +62,8 @@ const PersonalInfo = ({
   };
 
   const handleChange = (e) => {
-    if (!e.target) {
-      setPersonInfo({ ...personInfo, birthDate: e.inputProps.value });
-    } else {
-      setPersonInfo({ ...personInfo, [e.target.id]: e.target.value });
-    }
+    setPersonInfo({ ...personInfo, [e.target.id]: e.target.value });
+
     console.log(e);
   };
   return (

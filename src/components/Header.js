@@ -2,12 +2,12 @@
 import React, { useState } from "react";
 
 // React Router
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 //MUI
 import { Divider, Grid, List, ListItem, ListItemText } from "@mui/material";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
+
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material";
 import { Button } from "@mui/material";
@@ -23,7 +23,6 @@ import logo from "../assets/logo.svg";
 
 // this is header of the site and is shown in all the pages.
 const Header = () => {
-  const location = useLocation();
   const [value, setValue] = useState(0);
   const [open, setOpen] = useState(false);
   const theme = useTheme();
@@ -82,14 +81,13 @@ const Header = () => {
           >
             <Tabs
               indicatorColor="primary"
-              textColor="#fff"
               value={value}
               onChange={handleChange}
               aria-label="basic tabs example"
               sx={{
-                color: "#fff",
-                "& button": {
+                "& .MuiButtonBase-root": {
                   fontSize: "1.2rem",
+                  color: "#fff",
                 },
               }}
             >

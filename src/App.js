@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 //MUI components
 import { Grid } from "@mui/material";
-import { useTheme } from "@mui/material";
+
 import { ThemeProvider } from "@mui/material";
 import theme from "./components/Theme";
 import { Box } from "@mui/system";

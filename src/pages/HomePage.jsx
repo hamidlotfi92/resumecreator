@@ -5,7 +5,6 @@ import React from "react";
 import { Button, Grid, Paper, Typography } from "@mui/material";
 import { useMediaQuery, useTheme } from "@mui/material";
 import Box from "@mui/material/Box";
-import MoodIcon from "@mui/icons-material/Mood";
 
 //svgs
 import choice from "../assets/home-choice.svg";
