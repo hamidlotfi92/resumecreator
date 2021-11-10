@@ -14,6 +14,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 //pages
 import HomePage from "./pages/HomePage.jsx";
+import Resume from "./pages/Resume";
 
 function App() {
   return (
@@ -49,13 +50,15 @@ function App() {
               <Routes>
                 <Route exact path="/" element={<HomePage />} />
                 <Route path="/about" element={<h1>About</h1>} />
-                <Route path="/resume" element={<h1>resume</h1>} />
+                <Route path="/resume" element={<Resume />} />
               </Routes>
             </Box>
           </Grid>
 
           <Grid
-            sx={{ backgroundColor: theme.palette.background.default }}
+            sx={{
+              backgroundColor: theme.palette.background.default,
+            }}
             item
             container
             alignSelf="flex-end"

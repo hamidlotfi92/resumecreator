@@ -5,8 +5,11 @@ import React from "react";
 import { Box } from "@mui/system";
 import { Grid, IconButton, Typography } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import { useMediaQuery, useTheme } from "@mui/material";
 
 const Footer = () => {
+  const theme = useTheme();
+  const matchesSm = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <Grid
       sx={{ height: "20em", backgroundColor: "#e0e0e0" }}
@@ -16,7 +19,7 @@ const Footer = () => {
       justifyContent="center"
     >
       <Grid item justifyContent="center">
-        <Typography variant="h5" center>
+        <Typography variant={matchesSm ? "h6" : "h5"} center>
           این سایت یک پروژه متن باز و برای استفاده همه است{" "}
         </Typography>
       </Grid>

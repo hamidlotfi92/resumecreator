@@ -88,6 +88,7 @@ const HomePage = () => {
             </Grid>
           </Paper>
         </Grid>
+
         <Grid
           sx={{
             marginTop: matchesSm ? "6em" : "10em",
@@ -231,7 +232,6 @@ const HomePage = () => {
           sx={{
             marginTop: matchesSm ? "6em" : "10em",
             width: "100%",
-            marginBottom: "4em",
           }}
           container
           alignItems="center"
@@ -250,14 +250,18 @@ const HomePage = () => {
             />
           </Grid>
           <Paper
-            sx={{ justifyContent: "center", borderRadius: 7, maxWidth: "90%" }}
+            sx={{
+              borderRadius: 7,
+              width: { xs: "90%", sm: "30em", lg: "25em" },
+              justifyContent: "center",
+            }}
             variant="outlined"
           >
             <Grid
               sx={{
                 margin: "2em",
                 padding: matchesMd ? "0 1em" : 0,
-                width: "25em",
+                maxWidth: matchesSm ? "80%" : "25em",
               }}
               item
               container
