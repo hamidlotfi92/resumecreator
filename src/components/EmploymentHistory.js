@@ -64,7 +64,12 @@ const EmplymentHistory = ({
       columnSpacing={{ xs: 1, sm: 2, md: 3 }}
     >
       <Grid item>
-        <Typography variant="h3">تحصیلات</Typography>
+        <Typography
+          sx={{ color: (theme) => theme.palette.text.primary }}
+          variant="h3"
+        >
+          تحصیلات
+        </Typography>
       </Grid>
       <Grid item xs={1} sm={2}>
         <TextField
@@ -188,7 +193,12 @@ const EmplymentHistory = ({
         />
       ))}
       <Grid item>
-        <Typography variant="h3">سوابق شغلی</Typography>
+        <Typography
+          sx={{ color: (theme) => theme.palette.text.primary }}
+          variant="h3"
+        >
+          سوابق شغلی
+        </Typography>
       </Grid>
       <Grid item xs={1} sm={2}>
         <TextField

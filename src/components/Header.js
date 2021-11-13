@@ -18,11 +18,14 @@ import HomeIcon from "@mui/icons-material/Home";
 import ReceiptIcon from "@mui/icons-material/Receipt";
 import ContactMailIcon from "@mui/icons-material/ContactMail";
 import { useMediaQuery } from "@mui/material";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import { IconButton } from "@mui/material";
 // files
 import logo from "../assets/logo.svg";
 
 // this is header of the site and is shown in all the pages.
-const Header = () => {
+const Header = ({ setMode, mode }) => {
   const [value, setValue] = useState(2);
   const [open, setOpen] = useState(false);
   const theme = useTheme();
@@ -34,7 +37,9 @@ const Header = () => {
   const toggleDrawer = () => {
     setOpen(!open);
   };
-
+  const toggleColorMode = () => {
+    mode === "light" ? setMode("dark") : setMode("light");
+  };
   return (
     <Box
       sx={{
@@ -69,7 +74,17 @@ const Header = () => {
           <img src={logo} alt="logo" />
         </Grid>
         {/*----- Tabs ----- */}
-        <Grid item>
+        <Grid item sx={{ display: "inline-flex" }}>
+          <IconButton sx={{ ml: 1 }} onClick={toggleColorMode} color="inherit">
+            {theme.palette.mode === "dark" ? (
+              <Brightness7Icon
+                size="larg"
+                sx={{ color: theme.palette.text.primary }}
+              />
+            ) : (
+              <Brightness4Icon />
+            )}
+          </IconButton>
           <Box
             sx={{
               borderColor: "divider",

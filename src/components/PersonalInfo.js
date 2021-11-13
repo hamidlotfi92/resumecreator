@@ -83,10 +83,15 @@ const PersonalInfo = ({
         container
       >
         <Grid item>
-          <Typography variant="h4">انتخاب عکس</Typography>
+          <Typography
+            sx={{ color: (theme) => theme.palette.text.primary }}
+            variant="h4"
+          >
+            انتخاب عکس
+          </Typography>
         </Grid>
         <Grid item sx={{ "& img": { maxWidth: { xs: "13em", sm: "20em" } } }}>
-          <label style={{ "&:hover": { cursor: "pointer" } }} for="fileInput">
+          <label style={{ "&:hover": { cursor: "pointer" } }}>
             {!preview ? (
               <UploadFileRoundedIcon
                 color="secondary"
@@ -105,7 +110,7 @@ const PersonalInfo = ({
           />
         </Grid>
       </Grid>
-      <Grid item x xs={1} sm={2}>
+      <Grid item xs={1} sm={2}>
         <TextField
           sx={{
             textAlign: "right",

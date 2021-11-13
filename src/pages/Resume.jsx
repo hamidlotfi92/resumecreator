@@ -12,7 +12,7 @@ import { Collapse } from "@mui/material";
 import { Alert } from "@mui/material";
 import { IconButton } from "@mui/material";
 import { Close } from "@mui/icons-material";
-
+import { useTheme } from "@mui/system";
 //Components
 import PersonalInfo from "../components/PersonalInfo";
 import EmplymentHistory from "../components/EmploymentHistory";
@@ -22,6 +22,7 @@ const steps = ["اطلاعات شخصی", "سوابق", "تایید"];
 const Resume = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [skipped, setSkipped] = useState(new Set());
+  const theme = useTheme();
   //the states needed for resume are all here and are passed to each component if needed.
   //we can use redux or context to avoid passing data through but it's just 1 layer and not that complicated.
   const [preview, setPreview] = useState();
@@ -126,9 +127,17 @@ const Resume = () => {
 
         break;
       // this code is for testing pdf creation and is not ready yet
-      //   case 2:
-      //     return <Print preview={preview} />;
-      //     break;
+      case 2:
+        return (
+          <Print
+            preview={preview}
+            skillsArray={skillsArray}
+            personInfo={personInfo}
+            educationArray={educationArray}
+            employmentArray={employmentArray}
+          />
+        );
+        break;
       default:
         break;
     }
@@ -137,7 +146,13 @@ const Resume = () => {
   return (
     <Box
       sx={{
-        marginBottom: "4em",
+        backgroundColor: theme.palette.background.default,
+
+        backgroundImage: `radial-gradient(#444cf7 1.4000000000000001px, transparent 1.4000000000000001px), radial-gradient(#444cf7 1.4000000000000001px,${theme.palette.background.default} 1.4000000000000001px)`,
+        backgroundSize: "56px 56px",
+        backgroundPosition: "0 0,28px 28px",
+        backgroundAttachment: "fixed",
+
         width: "100%",
         "& .MuiAlert-message": { marginLeft: "auto" },
       }}
@@ -164,7 +179,7 @@ const Resume = () => {
           حواست باشه٫ مواردی که وارد نکردی اصلا به رزومه اضافه نمیشن
         </Alert>
       </Collapse>
-      <Stepper activeStep={activeStep}>
+      <Stepper sx={{ marginBottom: "2em" }} activeStep={activeStep}>
         {steps.map((label, index) => {
           const stepProps = {};
           const labelProps = {};
@@ -235,6 +250,7 @@ const Resume = () => {
           </Box>
         </React.Fragment>
       )}
+      <Box sx={{ paddingBottom: "4em" }}></Box>
     </Box>
   );
 };

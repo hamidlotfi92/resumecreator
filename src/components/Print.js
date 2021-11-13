@@ -1,90 +1,76 @@
 import React from "react";
-import { Page, Text, Image, Document, StyleSheet } from "@react-pdf/renderer";
+import {
+  Page,
+  Text,
+  Image,
+  Document,
+  StyleSheet,
+  Font,
+} from "@react-pdf/renderer";
 import ReactPDF from "@react-pdf/renderer";
 import { PDFViewer } from "@react-pdf/renderer";
 import { Button, Grid } from "@mui/material";
 
 const styles = StyleSheet.create({
-  body: {
-    paddingTop: 35,
-    paddingBottom: 65,
-    paddingHorizontal: 35,
-  },
-  title: {
-    fontSize: 24,
-    textAlign: "center",
-    fontFamily: "Oswald",
-  },
-  author: {
-    fontSize: 12,
-    textAlign: "center",
-    marginBottom: 40,
-  },
-  subtitle: {
-    fontSize: 18,
-    margin: 12,
-    fontFamily: "Oswald",
-  },
-  text: {
-    margin: 12,
-    fontSize: 14,
-    textAlign: "justify",
-    fontFamily: "Times-Roman",
-  },
-  image: {
-    marginVertical: 15,
-    marginHorizontal: 100,
-  },
   header: {
-    fontSize: 12,
-    marginBottom: 20,
-    textAlign: "center",
-    color: "grey",
+    display: "grid",
+
+    justifyContent: "center",
+    marginTop: "4em",
   },
-  pageNumber: {
-    position: "absolute",
-    fontSize: 12,
-    bottom: 30,
-    left: 0,
-    right: 0,
-    textAlign: "center",
-    color: "grey",
+  image: {},
+  text: {
+    dir: "rtl",
   },
 });
-const Quixote = () => (
-  <Document>
-    <Page size="A4" style={styles.body}>
-      <Text style={styles.header} fixed>
-        ~ Created with react-pdf ~
-      </Text>
-      <Text style={styles.title}>Don Quijote de la Mancha</Text>
-      <Text style={styles.author}>Miguel de Cervantes</Text>
 
-      <Text style={styles.subtitle}>
-        Capítulo I: Que trata de la condición y ejercicio del famoso hidalgo D.
-        Quijote de la Mancha
-      </Text>
+const Quixote = ({
+  preview,
+  skillsArray,
+  personInfo,
+  educationArray,
+  employmentArray,
+}) => (
+  <Document>
+    <Page style={styles.body}>
+      <div>
+        <div style={styles.header}>
+          <Image src={preview} alt="user avatar" />
+          <Text style={styles.text}>{personInfo.firstName}</Text>
+        </div>
+      </div>
     </Page>
   </Document>
 );
 
-const Print = ({ preview }) => {
+const Print = ({
+  preview,
+  skillsArray,
+  personInfo,
+  educationArray,
+  employmentArray,
+}) => {
   return (
-    <PDFViewer>
-      <Document>
-        <Page size="A4">
-          <Text fixed>~ Created with react-pdf ~</Text>
-          <Text>Don Quijote de la Mancha</Text>
-          <Text>Miguel de Cervantes</Text>
-          {preview ? <Image src={preview} /> : <Text>no image</Text>}
-
-          <Text>
-            Capítulo I: Que trata de la condición y ejercicio del famoso hidalgo
-            D. Quijote de la Mancha
-          </Text>
-        </Page>
-      </Document>
-    </PDFViewer>
+    <Grid
+      sx={{
+        "& iframe": {
+          width: "100%",
+          height: "40em",
+        },
+      }}
+      container
+    >
+      <PDFViewer>
+        <Quixote
+          styles={{ width: "100%" }}
+          preview={preview}
+          skillsArray={skillsArray}
+          personInfo={personInfo}
+          educationArray={educationArray}
+          employmentArray={employmentArray}
+        />
+      </PDFViewer>
+    </Grid>
   );
 };
 

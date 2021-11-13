@@ -19,7 +19,16 @@ const HomePage = () => {
   const matchesSm = useMediaQuery(theme.breakpoints.down("sm"));
   const matchesLg = useMediaQuery(theme.breakpoints.down("lg"));
   return (
-    <Box sx={{ backgroundColor: theme.palette.background.default }}>
+    <Box
+      sx={{
+        backgroundColor: theme.palette.background.default,
+
+        backgroundImage: `radial-gradient(#444cf7 1.4000000000000001px, transparent 1.4000000000000001px), radial-gradient(#444cf7 1.4000000000000001px,${theme.palette.background.default} 1.4000000000000001px)`,
+        backgroundSize: "56px 56px",
+        backgroundPosition: "0 0,28px 28px",
+        backgroundAttachment: "fixed",
+      }}
+    >
       <Grid
         container
         direction="column"

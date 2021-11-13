@@ -1,13 +1,13 @@
 //React
-import React from "react";
+import React, { useState } from "react";
 //React Router
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 //MUI components
 import { Grid } from "@mui/material";
 
-import { ThemeProvider } from "@mui/material";
-import theme from "./components/Theme";
+import { ThemeProvider, createTheme } from "@mui/material";
+
 import { Box } from "@mui/system";
 // Components
 import Header from "./components/Header";
@@ -17,6 +17,21 @@ import HomePage from "./pages/HomePage.jsx";
 import Resume from "./pages/Resume";
 
 function App() {
+  const [mode, setMode] = useState("light");
+  const theme = createTheme({
+    palette: {
+      mode,
+      primary: {
+        main: "#ff4141",
+      },
+      secondary: {
+        main: "#6c63ff",
+      },
+    },
+    typography: {
+      fontFamily: "Noto Naskh Arabic, serif",
+    },
+  });
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
@@ -37,7 +52,7 @@ function App() {
             item
             container
           >
-            <Header />
+            <Header mode={mode} setMode={setMode} />
           </Grid>
           <Grid
             sx={{
