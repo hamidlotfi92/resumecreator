@@ -91,7 +91,10 @@ const PersonalInfo = ({
           </Typography>
         </Grid>
         <Grid item sx={{ "& img": { maxWidth: { xs: "13em", sm: "20em" } } }}>
-          <label style={{ "&:hover": { cursor: "pointer" } }}>
+          <label
+            htmlFor="fileInput"
+            style={{ "&:hover": { cursor: "pointer" } }}
+          >
             {!preview ? (
               <UploadFileRoundedIcon
                 color="secondary"
@@ -214,10 +217,10 @@ const PersonalInfo = ({
             },
           }}
           size="normal"
-          label="تاریخ تولد"
+          label="عنوان حرفه ای"
           variant="standard"
-          placeholder="YYYY/MM/DD "
-          id="birthDate"
+          placeholder="مثلا : برنامه نویس٫ طراح"
+          id="proTitle"
           onChange={handleChange}
         />
       </Grid>
