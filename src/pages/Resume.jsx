@@ -8,7 +8,7 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { Collapse } from "@mui/material";
+import { Collapse, Grid } from "@mui/material";
 import { Alert } from "@mui/material";
 import { IconButton } from "@mui/material";
 import { Close } from "@mui/icons-material";
@@ -216,7 +216,10 @@ const Resume = () => {
       ) : (
         <React.Fragment>
           {/*<Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>*/}
-          {renderSwitch(activeStep)}
+          <Grid container justifyContent="center">
+            {renderSwitch(activeStep)}
+          </Grid>
+
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Button
               disabled={activeStep === 0}

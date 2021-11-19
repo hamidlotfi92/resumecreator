@@ -5,7 +5,7 @@ import { Button, Grid } from "@mui/material";
 
 import { Typography } from "@mui/material";
 import { TextField } from "@mui/material";
-
+import { useTheme } from "@emotion/react";
 //components
 import EduPreview from "./EduPreview";
 import EmploymentPreview from "./EmploymentPreview";
@@ -18,7 +18,7 @@ const EmplymentHistory = ({
 }) => {
   const [education, setEducation] = useState({});
   const [employment, setEmployment] = useState({});
-
+  const theme = useTheme();
   const handeEduChange = (e) => {
     setEducation({ ...education, [e.target.id]: e.target.value });
   };
@@ -57,6 +57,11 @@ const EmplymentHistory = ({
   };
   return (
     <Grid
+      item
+      sx={{
+        backgroundColor: theme.palette.background.default,
+        maxWidth: "45em !important",
+      }}
       container
       direction="column"
       alignItems="center"

@@ -68,6 +68,11 @@ const PersonalInfo = ({
   };
   return (
     <Grid
+      sx={{
+        backgroundColor: theme.palette.background.default,
+        maxWidth: "45em !important",
+      }}
+      item
       container
       direction="column"
       alignItems="center"
@@ -75,7 +80,6 @@ const PersonalInfo = ({
       columnSpacing={{ xs: 1, sm: 2, md: 3 }}
     >
       <Grid
-        sx={{ maxWidth: "45em !important" }}
         item
         direction={matchesSm ? "column" : "row"}
         justifyContent="space-around"
@@ -90,7 +94,7 @@ const PersonalInfo = ({
             انتخاب عکس
           </Typography>
         </Grid>
-        <Grid item sx={{ "& img": { maxWidth: { xs: "13em", sm: "20em" } } }}>
+        <Grid item sx={{ "& img": { maxWidth: { xs: "13em", sm: "10em" } } }}>
           <label
             htmlFor="fileInput"
             style={{ "&:hover": { cursor: "pointer" } }}
@@ -251,7 +255,7 @@ const PersonalInfo = ({
         alignItems="center"
         direction="column"
       >
-        <Grid item>
+        <Grid sx={{ color: (theme) => theme.palette.text.primary }} item>
           <Typography variant="h3">مهارت ها</Typography>
         </Grid>
         <Grid

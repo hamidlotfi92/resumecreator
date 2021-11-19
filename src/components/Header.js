@@ -1,5 +1,5 @@
 //React
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // React Router
 import { Link } from "react-router-dom";
@@ -33,7 +33,21 @@ const Header = ({ setMode, mode }) => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+  useEffect(() => {
+    switch (window.location.pathname) {
+      case "/":
+        setValue(2);
+        break;
+      case "/about":
+        setValue(1);
+        break;
+      case "/resume":
+        setValue(0);
+        break;
+      default:
+        break;
+    }
+  }, [value]);
   const toggleDrawer = () => {
     setOpen(!open);
   };
