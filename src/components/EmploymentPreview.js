@@ -13,9 +13,6 @@ const EmploymentPreview = ({
   index,
   deleteEmploymentFromArray,
 }) => {
-  console.log(
-    title + " در " + company + " شهر " + city + " به مدت " + duration
-  );
   return (
     <Paper
       sx={{

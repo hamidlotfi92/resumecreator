@@ -1,6 +1,6 @@
 //React
-import React from "react";
-
+import React, { memo } from "react";
+import { useNavigate } from "react-router-dom";
 //MUI
 import { Button, Grid, Paper, Typography } from "@mui/material";
 import { useMediaQuery, useTheme } from "@mui/material";
@@ -14,6 +14,7 @@ import responsive from "../assets/home-responsive.svg";
 import bemyGuest from "../assets/beMyGuest.svg";
 
 const HomePage = () => {
+  const navigate = useNavigate();
   const theme = useTheme();
   const matchesMd = useMediaQuery(theme.breakpoints.down("md"));
   const matchesSm = useMediaQuery(theme.breakpoints.down("sm"));
@@ -89,10 +90,13 @@ const HomePage = () => {
                   fontWeight: 700,
                 }}
                 variant="outlined"
+                onClick={() => {
+                  navigate("/resume");
+                }}
               >
                 {" "}
                 رزومه ت رو بساز
-              </Button>
+              </Button>{" "}
             </Grid>
           </Paper>
         </Grid>
@@ -296,6 +300,9 @@ const HomePage = () => {
                   fontWeight: 700,
                 }}
                 variant="outlined"
+                onClick={() => {
+                  navigate("/resume");
+                }}
               >
                 {" "}
                 رزومه ت رو بساز

@@ -1,17 +1,9 @@
-import React from "react";
-import {
-  Page,
-  Text,
-  Image,
-  Document,
-  StyleSheet,
-  Font,
-} from "@react-pdf/renderer";
-import ReactPDF from "@react-pdf/renderer";
-import { PDFViewer } from "@react-pdf/renderer";
+//React
+import React, { memo } from "react";
+//MUi
 import { Button, Grid } from "@mui/material";
+//jsPDF is used to create PDF file
 import { jsPDF } from "jspdf";
-import PDFObject from "pdfobject";
 
 const Print = ({
   preview,
@@ -31,88 +23,114 @@ const Print = ({
   doc.addFont("../assets/fonts/Amiri-Regular.ttf", "Amiri", "normal");
 
   doc.setFont("Amiri");
+
+  //header
   // picture
+  //lets use variable to prevent having blank space ,by adding a value to it every time we add content.
+  let yPos = 40;
   doc.setFillColor(240, 240, 240);
   doc.roundedRect(10, 24, 190, 60, 3, 3, "F");
   if (preview) {
     doc.addImage(preview, "JPEG", 90, 4, 30, 40);
+    yPos += 8;
   }
   //header and personal info
   if (personInfo.lastName) {
     doc.setFontSize(16);
     doc.setTextColor(25, 125, 190);
     const fullName = `${personInfo.firstName} ${personInfo.lastName}`;
-    doc.text(fullName, 105, 48, { align: "center" });
+    doc.text(fullName, 105, yPos, { align: "center" });
+    yPos += 5;
   }
   if (personInfo.proTitle) {
     doc.setFontSize(9);
     doc.setTextColor(150, 150, 150);
-    doc.text(personInfo.proTitle, 105, 53, { align: "center" });
+    doc.text(personInfo.proTitle, 105, yPos, { align: "center" });
   }
+
   doc.setFontSize(12);
   doc.setTextColor(100, 100, 100);
-  doc.text(`${personInfo.email} : ایمیل `, 175, 61, { align: "right" });
-  doc.text(`${personInfo.mobileNumber} : همراه `, 175, 68, { align: "right" });
-  doc.text(`${personInfo.age} : سن `, 75, 61, { align: "right" });
+  if (personInfo.email) {
+    yPos += 8;
+    doc.text(`${personInfo.email} : ایمیل `, 175, yPos, { align: "right" });
+  }
+  if (personInfo.age) {
+    doc.text(`${personInfo.age} : سن `, 75, yPos, { align: "right" });
+  }
+  if (personInfo.mobileNumber) {
+    yPos += 7;
+    doc.text(`${personInfo.mobileNumber} : همراه `, 175, yPos, {
+      align: "right",
+    });
+  }
+  yPos = 90;
   // summery
   doc.setTextColor(25, 125, 190);
   doc.setFontSize(14);
-  doc.text("درباره من", 113, 90, { align: "right" });
-  doc.setDrawColor(25, 125, 190);
-  doc.line(56, 93, 153, 93);
-  doc.setLineWidth(0.6);
-  doc.line(83, 93, 125, 93);
-  doc.setFontSize(12);
-  doc.setTextColor(100, 100, 100);
   if (personInfo.summery) {
+    doc.text("درباره من", 113, 90, { align: "right" });
+    doc.setDrawColor(25, 125, 190);
+    doc.line(56, 93, 153, 93);
+    doc.setLineWidth(0.6);
+    doc.line(83, 93, 125, 93);
+    doc.setFontSize(12);
+    doc.setTextColor(100, 100, 100);
+
     doc.text(personInfo.summery, 196, 100, {
       align: "right",
       maxWidth: 270,
       lineHeightFactor: 1.5,
     });
+    yPos += 50;
   }
 
   // edu history
-  doc.setTextColor(25, 125, 190);
-  doc.setFontSize(14);
-  doc.text("سوابق تحصیلی", 105, 140, { align: "center" });
-  doc.setDrawColor(25, 125, 190);
-  doc.setLineWidth(0.2);
-  doc.line(56, 143, 153, 143);
-  doc.setLineWidth(0.6);
-  doc.line(83, 143, 125, 143);
-  if (educationArray) {
+  if (educationArray.length > 0) {
+    doc.setTextColor(25, 125, 190);
+    doc.setFontSize(14);
+    doc.text("سوابق تحصیلی", 105, yPos, { align: "center" });
+    doc.setDrawColor(25, 125, 190);
+    doc.setLineWidth(0.2);
+    yPos += 3;
+    doc.line(56, yPos, 153, yPos);
+    doc.setLineWidth(0.6);
+    doc.line(83, yPos, 125, yPos);
+
     let eduX = 196;
     const eduTempArray =
       educationArray.lenght > 3 ? educationArray.slice(0, 3) : educationArray;
     eduTempArray.map((edu) => {
       doc.setFontSize(14);
       doc.setTextColor(100, 100, 100);
-      doc.text(`${edu.degree} ${edu.course} `, eduX, 152, { align: "right" });
+      doc.text(`${edu.degree} ${edu.course} `, eduX, yPos + 9, {
+        align: "right",
+      });
       doc.setFontSize(12);
-      doc.text(`دانشگاه ${edu.university} ${edu.city} `, eduX, 162, {
+      doc.text(`دانشگاه ${edu.university} ${edu.city} `, eduX, yPos + 19, {
         align: "right",
       });
       if (edu.achivements) {
-        doc.text(`دست آوردها: ${edu.achivements} `, eduX, 172, {
+        doc.text(`دست آوردها: ${edu.achivements} `, eduX, yPos + 29, {
           align: "right",
           maxWidth: 80,
         });
       }
       eduX -= 75;
     });
+    yPos += 47;
   }
   // emp history
 
-  if (employmentArray) {
+  if (employmentArray.length > 0) {
     doc.setTextColor(25, 125, 190);
     doc.setFontSize(14);
-    doc.text("سوابق شغلی", 105, 190, { align: "center" });
+    doc.text("سوابق شغلی", 105, yPos, { align: "center" });
     doc.setDrawColor(25, 125, 190);
     doc.setLineWidth(0.2);
-    doc.line(56, 193, 153, 193);
+    yPos += 3;
+    doc.line(56, yPos, 153, yPos);
     doc.setLineWidth(0.6);
-    doc.line(83, 193, 125, 193);
+    doc.line(83, yPos, 125, yPos);
     let empX = 196;
     const empTempArray =
       employmentArray.lenght > 3
@@ -121,34 +139,36 @@ const Print = ({
     empTempArray.map((emp) => {
       doc.setFontSize(14);
       doc.setTextColor(100, 100, 100);
-      doc.text(`${emp.title} در ${emp.company} `, empX, 202, {
+      doc.text(`${emp.title} در ${emp.company} `, empX, yPos + 9, {
         align: "right",
       });
       doc.setFontSize(12);
-      doc.text(`به مدت ${emp.duration} ${emp.city} `, empX, 212, {
+      doc.text(`به مدت ${emp.duration} ${emp.city} `, empX, yPos + 19, {
         align: "right",
       });
       if (emp.achivements) {
-        doc.text(`دست آوردها: ${emp.achivements} `, empX, 222, {
+        doc.text(`دست آوردها: ${emp.achivements} `, empX, yPos + 29, {
           align: "right",
           maxWidth: 80,
         });
       }
       empX -= 75;
     });
+    yPos += 47;
   }
-  if (skillsArray) {
+  if (skillsArray.length > 0) {
     let tempSkillArray = skillsArray.slice();
     doc.setTextColor(25, 125, 190);
     doc.setFontSize(14);
-    doc.text("مهارت ها", 105, 240, { align: "center" });
+    doc.text("مهارت ها", 105, yPos, { align: "center" });
     doc.setDrawColor(25, 125, 190);
     doc.setLineWidth(0.2);
-    doc.line(56, 243, 153, 243);
+    yPos += 3;
+    doc.line(56, yPos, 153, yPos);
     doc.setLineWidth(0.6);
-    doc.line(83, 243, 125, 243);
+    doc.line(83, yPos, 125, yPos);
     let skillX = 185;
-    let skillY = 252;
+    let skillY = yPos + 8;
     tempSkillArray.map((skill, index) => {
       doc.setFontSize(10);
       doc.text(skill.name, skillX, skillY, {
@@ -156,16 +176,11 @@ const Print = ({
       });
 
       skillX -= 10 + skill.name.length;
-      console.log(10 + skill.name.length);
-      // if (skill.name.length > 6) {
-      //   skillX -= 15 + skill.name.length;
-      // } else {
-      //   skillX -= 10;
-      // }
+
       if (skillX < 30) {
         if (skillY !== 262) {
           skillX = 185;
-          skillY = 262;
+          skillY = yPos + 19;
         } else if (skillY === 262) {
           skillX = -20;
         }
@@ -173,20 +188,22 @@ const Print = ({
     });
   }
 
-  //PDFObject.embed(doc.output("bloburi"), document.getElementById("pdfcontent"));
-  //doc.save("a4.pdf");
-
-  PDFObject.embed(doc.output("bloburi"), document.getElementById("pdfcontent"));
+  const tmpPDF = doc.output("bloburi");
   return (
-    <Grid
-      sx={{
-        "& iframe": {
-          width: "100%",
-          height: "40em",
-        },
-      }}
-      container
-    >
+    <Grid item container direction="column" alignItems="center">
+      <iframe
+        style={{ width: "70%", height: "98vw" }}
+        src={tmpPDF}
+        type="application/pdf"
+        title="preview"
+      />
+      <Button
+        onClick={() => {
+          doc.save(`resume`);
+        }}
+      >
+        دانلود
+      </Button>
       <div id="pdfcontent"></div>
     </Grid>
   );

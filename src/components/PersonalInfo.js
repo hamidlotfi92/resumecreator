@@ -1,6 +1,6 @@
 //React
 
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 //MUI
 import { Grid, Paper, Slider, Typography } from "@mui/material";
 import { TextField } from "@mui/material";
@@ -57,14 +57,12 @@ const PersonalInfo = ({
   };
   const deleteSkill = (e) => {
     const newArray = skillsArray.filter((skill) => skill.name !== e.target.id);
-    console.log(e.target.id);
+
     setSkillsArray(newArray);
   };
 
   const handleChange = (e) => {
     setPersonInfo({ ...personInfo, [e.target.id]: e.target.value });
-
-    console.log(e);
   };
   return (
     <Grid

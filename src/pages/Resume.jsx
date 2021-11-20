@@ -1,5 +1,5 @@
 //React
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 
 //MUI
 import Box from "@mui/material/Box";
@@ -91,13 +91,6 @@ const Resume = () => {
     });
   };
 
-  // reset all the states regarding user information
-  const handleReset = () => {
-    setActiveStep(0);
-    setPreview(undefined);
-    setSkillsArray([]);
-    setSelectedFile(undefined);
-  };
   //switches between steps according to activestep
   const renderSwitch = (param) => {
     switch (param) {
@@ -200,23 +193,14 @@ const Resume = () => {
       </Stepper>
       {activeStep === steps.length ? (
         <React.Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>رزومه شما اماده شد</Typography>
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Box sx={{ flex: "1 1 auto" }} />
-            <Button
-              sx={{ margin: "2em" }}
-              color="secondary"
-              variant="outlined"
-              onClick={handleReset}
-            >
-              رزومه جدید
-            </Button>
           </Box>
         </React.Fragment>
       ) : (
         <React.Fragment>
           {/*<Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>*/}
-          <Grid container justifyContent="center">
+          <Grid container direction="column" alignItems="center">
             {renderSwitch(activeStep)}
           </Grid>
 
@@ -226,7 +210,11 @@ const Resume = () => {
               onClick={handleBack}
               variant="outlined"
               color="secondary"
-              sx={{ mr: 2, ml: 2 }}
+              sx={{
+                mr: 2,
+                ml: 2,
+                backgroundColor: theme.palette.background.default,
+              }}
             >
               قبلی
             </Button>
@@ -236,17 +224,26 @@ const Resume = () => {
                 variant="outlined"
                 color="secondary"
                 onClick={handleSkip}
-                sx={{ mr: 2, ml: 2 }}
+                sx={{
+                  mr: 2,
+                  ml: 2,
+                  backgroundColor: theme.palette.background.default,
+                }}
               >
                 رد کردن
               </Button>
             )}
 
             <Button
-              sx={{ mr: 2, ml: 2 }}
+              sx={{
+                mr: 2,
+                ml: 2,
+                backgroundColor: theme.palette.background.default,
+              }}
               variant="outlined"
               color="secondary"
               onClick={handleNext}
+              disabled={activeStep === steps.length - 1}
             >
               {activeStep === steps.length - 1 ? "پایان" : "بعدی"}
             </Button>
@@ -257,4 +254,4 @@ const Resume = () => {
     </Box>
   );
 };
-export default Resume;
+export default memo(Resume);

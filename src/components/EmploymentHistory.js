@@ -1,5 +1,5 @@
 //React
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 //MUI
 import { Button, Grid } from "@mui/material";
 
@@ -16,7 +16,13 @@ const EmplymentHistory = ({
   setEmploymentArray,
   employmentArray,
 }) => {
-  const [education, setEducation] = useState({});
+  const [education, setEducation] = useState({
+    degree: null,
+    course: null,
+    university: null,
+    city: null,
+    achivements: null,
+  });
   const [employment, setEmployment] = useState({});
   const theme = useTheme();
   const handeEduChange = (e) => {
@@ -27,10 +33,17 @@ const EmplymentHistory = ({
   };
 
   const addToEduArray = () => {
-    if (education.university) {
+    if (education.university !== null) {
       const newEduArray = educationArray.slice();
       newEduArray.push(education);
       setEducationArray(newEduArray);
+      setEducation({
+        degree: null,
+        course: null,
+        university: null,
+        city: null,
+        achivements: null,
+      });
     }
   };
   const addToEmplymentArray = () => {
@@ -38,7 +51,6 @@ const EmplymentHistory = ({
       const newEmpArray = employmentArray.slice();
       newEmpArray.push(employment);
       setEmploymentArray(newEmpArray);
-      console.log(newEmpArray);
     }
   };
 
@@ -70,7 +82,10 @@ const EmplymentHistory = ({
     >
       <Grid item>
         <Typography
-          sx={{ color: (theme) => theme.palette.text.primary }}
+          sx={{
+            paddingTop: "1em",
+            color: (theme) => theme.palette.text.primary,
+          }}
           variant="h3"
         >
           تحصیلات
@@ -90,12 +105,14 @@ const EmplymentHistory = ({
               fontSize: "1.5rem",
             },
           }}
+          value={educationArray.degree}
           label="مقطع"
           variant="standard"
           onChange={handeEduChange}
         />
         <TextField
           id="course"
+          value={educationArray.course}
           sx={{
             marginTop: "1em",
             marginLeft: "2em",
@@ -116,6 +133,7 @@ const EmplymentHistory = ({
       <Grid item xs={1} sm={2}>
         <TextField
           id="university"
+          value={educationArray.university}
           sx={{
             textAlign: "right",
             marginTop: "1em",
@@ -133,6 +151,7 @@ const EmplymentHistory = ({
         />
         <TextField
           id="city"
+          value={educationArray.city}
           sx={{
             marginTop: "1em",
             marginLeft: "2em",
@@ -159,6 +178,7 @@ const EmplymentHistory = ({
       >
         <TextField
           id="achivements"
+          value={educationArray.achivements}
           sx={{
             marginTop: "4em",
 
@@ -199,7 +219,10 @@ const EmplymentHistory = ({
       ))}
       <Grid item>
         <Typography
-          sx={{ color: (theme) => theme.palette.text.primary }}
+          sx={{
+            paddingTop: "1.5em",
+            color: (theme) => theme.palette.text.primary,
+          }}
           variant="h3"
         >
           سوابق شغلی
@@ -336,4 +359,4 @@ const EmplymentHistory = ({
   );
 };
 
-export default EmplymentHistory;
+export default memo(EmplymentHistory);

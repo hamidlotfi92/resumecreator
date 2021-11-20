@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import { Divider, Grid, List, ListItem, ListItemText } from "@mui/material";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material";
 import { Button } from "@mui/material";
@@ -33,6 +32,7 @@ const Header = ({ setMode, mode }) => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  //using useEffect to set the selected tab according to the address we are in
   useEffect(() => {
     switch (window.location.pathname) {
       case "/":
@@ -53,6 +53,12 @@ const Header = ({ setMode, mode }) => {
   };
   const toggleColorMode = () => {
     mode === "light" ? setMode("dark") : setMode("light");
+
+    //adding theme Color mode to local storage so it wont change after refresh
+    window.localStorage.setItem(
+      "lightMode",
+      mode === "light" ? "dark" : "light"
+    );
   };
   return (
     <Box
@@ -126,6 +132,7 @@ const Header = ({ setMode, mode }) => {
               <Tab component={Link} to="/" label="صفحه اصلی" />
             </Tabs>
           </Box>
+          {/*----- Menu ----- */}
           <Box
             sx={{
               display: {
