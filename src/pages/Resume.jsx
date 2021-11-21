@@ -1,5 +1,5 @@
 //React
-import React, { useState, useEffect, memo } from "react";
+import React, { useState, useEffect, Suspense, lazy } from "react";
 
 //MUI
 import Box from "@mui/material/Box";
@@ -14,9 +14,10 @@ import { IconButton } from "@mui/material";
 import { Close } from "@mui/icons-material";
 import { useTheme } from "@mui/system";
 //Components
-import PersonalInfo from "../components/PersonalInfo";
-import EmplymentHistory from "../components/EmploymentHistory";
-import Print from "../components/Print";
+const PersonalInfo = lazy(() => import("../components/PersonalInfo"));
+const EmplymentHistory = lazy(() => import("../components/EmploymentHistory"));
+const Print = lazy(() => import("../components/Print"));
+
 const steps = ["اطلاعات شخصی", "سوابق", "تایید"];
 
 const Resume = () => {
@@ -201,7 +202,9 @@ const Resume = () => {
         <React.Fragment>
           {/*<Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>*/}
           <Grid container direction="column" alignItems="center">
-            {renderSwitch(activeStep)}
+            <Suspense fallback={<div>Loading</div>}>
+              {renderSwitch(activeStep)}
+            </Suspense>
           </Grid>
 
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
