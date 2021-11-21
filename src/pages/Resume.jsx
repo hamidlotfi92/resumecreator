@@ -257,4 +257,4 @@ const Resume = () => {
     </Box>
   );
 };
-export default memo(Resume);
+export default Resume;
