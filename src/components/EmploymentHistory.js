@@ -359,4 +359,4 @@ const EmplymentHistory = ({
   );
 };
 
-export default memo(EmplymentHistory);
+export default EmplymentHistory;
