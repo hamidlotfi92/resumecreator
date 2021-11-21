@@ -14,8 +14,9 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 //pages
 import About from "./pages/About";
+import Resume from "./pages/Resume";
 const HomePage = lazy(() => import("./pages/HomePage.jsx"));
-const Resume = lazy(() => import("./pages/Resume"));
+//const Resume = lazy(() => import("./pages/Resume"));
 
 function App() {
   // first we check if we had changed color mode befor, and if yes, use it.
