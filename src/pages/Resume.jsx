@@ -14,6 +14,7 @@ import { IconButton } from "@mui/material";
 import { Close } from "@mui/icons-material";
 import { useTheme } from "@mui/system";
 //Components
+import Spinner from "../components/spinner.component";
 const PersonalInfo = lazy(() => import("../components/PersonalInfo"));
 const EmplymentHistory = lazy(() => import("../components/EmploymentHistory"));
 const Print = lazy(() => import("../components/Print"));
@@ -202,7 +203,7 @@ const Resume = () => {
         <React.Fragment>
           {/*<Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>*/}
           <Grid container direction="column" alignItems="center">
-            <Suspense fallback={<div>Loading</div>}>
+            <Suspense fallback={<Spinner />}>
               {renderSwitch(activeStep)}
             </Suspense>
           </Grid>

@@ -12,11 +12,12 @@ import { Box } from "@mui/system";
 // Components
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Spinner from "./components/spinner.component";
 //pages
-import About from "./pages/About";
-import Resume from "./pages/Resume";
+const About = lazy(() => import("./pages/About"));
+
 const HomePage = lazy(() => import("./pages/HomePage.jsx"));
-//const Resume = lazy(() => import("./pages/Resume"));
+const Resume = lazy(() => import("./pages/Resume"));
 
 function App() {
   // first we check if we had changed color mode befor, and if yes, use it.
@@ -42,7 +43,7 @@ function App() {
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
-        <Suspense fallback={<div>Loading</div>}>
+        <Suspense fallback={<Spinner />}>
           <Grid
             sx={{
               height: "100%",

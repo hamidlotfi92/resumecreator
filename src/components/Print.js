@@ -1,7 +1,9 @@
 //React
 import React, { memo } from "react";
 //MUi
-import { Button, Grid } from "@mui/material";
+import { Button, Grid, Paper, Typography } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
+import { useTheme } from "@emotion/react";
 //jsPDF is used to create PDF file
 import { jsPDF } from "jspdf";
 
@@ -12,6 +14,9 @@ const Print = ({
   educationArray,
   employmentArray,
 }) => {
+  const theme = useTheme();
+  const matchesSm = useMediaQuery(theme.breakpoints.down("sm"));
+
   // to create pdf we use jspdf, it's a bit hard to create but it supports rtl fonts.
   const doc = new jsPDF({ filters: ["ASCIIHexEncode"] });
 
@@ -187,22 +192,44 @@ const Print = ({
       }
     });
   }
+  // <iframe
+  //   style={{ width: "70%", height: "98vw" }}
+  //   src={tmpPDF}
+  //   type="application/pdf"
+  //   title="preview"
+  // />
 
-  const tmpPDF = doc.output("bloburi");
   return (
     <Grid item container direction="column" alignItems="center">
-      <iframe
-        style={{ width: "70%", height: "98vw" }}
-        src={tmpPDF}
-        type="application/pdf"
-        title="preview"
-      />
+      {matchesSm ? (
+        <Paper>
+          <Typography sx={{ padding: "2em" }} variant="h7">
+            {" "}
+            برای دیدن پیش نمایش با کامپیوتر این صفحه رو باز کنید
+          </Typography>
+        </Paper>
+      ) : (
+        <embed
+          style={{ width: "70%", height: "98vw" }}
+          type="application/pdf"
+          src={doc.output("bloburi")}
+        />
+      )}
+
       <Button
+        sx={{
+          marginTop: "2em",
+          backgroundColor: (theme) => theme.palette.background.default,
+          fontWeight: 600,
+        }}
+        variant="outlined"
         onClick={() => {
           doc.save(`resume`);
         }}
+        color="secondary"
+        size="large"
       >
-        دانلود
+        دانلود رزومه
       </Button>
       <div id="pdfcontent"></div>
     </Grid>
